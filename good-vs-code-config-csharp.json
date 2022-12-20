@@ -1,0 +1,12 @@
+{
+	"files.exclude": {
+		"**/*.tres": true,
+		"export_presets.cfg": true,
+		"packages.config": true,
+		"project.godot": true,
+		"**/packages/**": true,
+		"**/.mono/**": true,
+		"**/.import/**": true,
+		"*.import": true
+	}
+}
