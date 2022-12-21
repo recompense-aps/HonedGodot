@@ -3,7 +3,7 @@ using Godot;
 
 namespace HonedGodot
 {
-	public enum HonedGodotLogTag { ErrorHandling }
+	public enum HonedGodotLogTag { ErrorHandling, SceneLoader }
 
 	static class Logging
 	{
