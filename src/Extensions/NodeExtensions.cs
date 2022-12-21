@@ -35,5 +35,27 @@ namespace HonedGodot.Extensions
 			return InlineSignals.Connect(context, source, signal, new InlineSignal<T1, T2, T3, T4, T5>(handler));
 		}
 
+		public static Func<bool> TemporaryEffect<T>(this T node, Action start, Action end, float time) where T:Node
+		{
+			var timer = new Timer();
+			timer.WaitTime = time;
+			bool locked = false;
+
+			node.InlineConnect(timer, Constants.Signal_Timer_Timeout, () => 
+			{
+				timer.QueueFree();
+				end();
+				locked = true;
+				GD.Print("cleared timer");
+			});
+
+			start();
+
+			node.AddChild(timer);
+			timer.Start();
+
+			return () => locked;
+		}
+
 	}
 }
