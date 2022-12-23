@@ -14,6 +14,10 @@ namespace HonedGodot
 
 		public const string Signal_Timer_Timeout = "timeout";
 
+		#region RigidBody2D Signals
+		public const string Signal_RigidBody2D_BodyEntered = "body_entered";
+		#endregion
+
 		public const string Signal_Area2D_AreaEntered = "area_entered";
 		public const string Signal_Area2D_BodyEntered = "body_entered";
 		public const string Signal_Area2D_AreaExited = "area_exited";

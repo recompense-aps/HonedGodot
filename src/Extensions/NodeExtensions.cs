@@ -5,6 +5,11 @@ namespace HonedGodot.Extensions
 {
 	public static class NodeExtensions
 	{
+		public static T As<T>(this Node n) where T:class
+		{
+			return n as T;
+		}
+		
 		public static InlineSignal InlineConnect(this Node context, Node source, string signal, Action handler)
 		{
 			return InlineSignals.Connect(context, source, signal, new InlineSignal(handler));
