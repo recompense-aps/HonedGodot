@@ -7,6 +7,7 @@ namespace HonedGodot
 	{
 		public class State
 		{
+			public T Id { get; set; }
 			public Action<FiniteStateMachine<T>> Start { get; private set; }
             public Action<FiniteStateMachine<T>> Execute { get; private set; }
             public Action<FiniteStateMachine<T>> End { get; private set; }
@@ -57,6 +58,7 @@ namespace HonedGodot
         public State Compose(T stateId)
         {
             var state = new State();
+			state.Id = stateId;
             states[stateId] = state;
             return state;
         }
