@@ -35,5 +35,64 @@ namespace HonedGodot.Extensions
 			return InlineSignals.Connect(context, source, signal, new InlineSignal<T1, T2, T3, T4, T5>(handler));
 		}
 
+		public static void InlineCallDeffered(this Node context, Action action)
+		{
+			var obj = new DefferedObject();
+			obj.Action = action;
+
+			obj.CallDeferred(nameof(DefferedObject.Execute));
+		}
+
+		public static void Tag<T>(this Node node, T data)
+		{
+			var tag = new IdTag<T>();
+			tag.Data = data;
+
+			node.AddChild(tag);
+		}
+
+		public static IdTag<T> GetTag<T>(this Node node)
+		{
+			foreach(var child in node.GetChildren())
+			{
+				if (child is IdTag<T>)
+					return child as IdTag<T>;
+			}
+
+			return null;
+		}
+
+		public static Func<bool> TemporaryEffect<T>(this T node, Action start, Action end, float time) where T:Node
+		{
+			var timer = new Timer();
+			timer.WaitTime = time;
+			bool locked = false;
+
+			node.InlineConnect(timer, Constants.Signal_Timer_Timeout, () => 
+			{
+				timer.QueueFree();
+				end();
+				locked = true;
+				GD.Print("cleared timer");
+			});
+
+			start();
+
+			node.AddChild(timer);
+			timer.Start();
+
+			return () => locked;
+		}
+
+		private class DefferedObject : Godot.Object
+		{
+			public Action Action { get; set; }
+
+			public void Execute()
+			{
+				Action();
+			}
+		}
+
 	}
 }
