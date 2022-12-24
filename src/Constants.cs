@@ -22,5 +22,9 @@ namespace HonedGodot
 		public const string Signal_Area2D_BodyEntered = "body_entered";
 		public const string Signal_Area2D_AreaExited = "area_exited";
 		public const string Signal_Area2D_BodyExited = "body_exited";
+
+		#region AudioStreamPlayerSignals
+		public const string Signal_AudioStreamPlayer_Finished = "finished";
+		#endregion
 	}
 }
