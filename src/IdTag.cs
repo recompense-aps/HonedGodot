@@ -14,8 +14,10 @@ namespace HonedGodot
 
 			this.InlineConnect<Node>(parent, Constants.Signal_Node_ChildEnteredTree, child => 
 			{
-				// Propagate(child);
+				Propagate(child);
 			});
+
+			Logging.Log($"Tagged {parent.Name} with data {Data}", HonedGodotLogTag.Tagging);
 		}
 
 		public void Propagate(params Node[] otherNodes)

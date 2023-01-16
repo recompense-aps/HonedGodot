@@ -67,6 +67,11 @@ namespace HonedGodot.Extensions
 			return null;
 		}
 
+		public static void SetZIndexLayer<T>(this Node2D node, T layer) where T:Enum
+		{
+			node.ZIndex = (int)(object)layer;
+		}
+
 		public static Func<bool> TemporaryEffect<T>(this T node, Action start, Action end, float time) where T:Node
 		{
 			var timer = new Timer();

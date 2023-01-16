@@ -3,10 +3,12 @@ using Godot;
 
 namespace HonedGodot
 {
-	public enum HonedGodotLogTag { ErrorHandling, SceneLoader }
+	public enum HonedGodotLogTag { ErrorHandling, SceneLoader, Tagging }
 
 	static class Logging
 	{
+		public static bool Enabled { get; set; }
+
 		private static Logger<HonedGodotLogTag> internalLogger = new Logger<HonedGodotLogTag>("hg");
 
 		public static void Log(object what, HonedGodotLogTag tag)
