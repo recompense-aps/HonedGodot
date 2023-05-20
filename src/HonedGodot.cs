@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Linq;
 using System.Text;
 using Godot;
+using HonedGodot.Extensions;
 
 namespace HonedGodot
 {
@@ -55,6 +56,24 @@ namespace HonedGodot
 
 			System.IO.File.WriteAllText($"./{fileName}.cs", file.ToString());
 
+		}
+
+		public static void GenerateTileMapDataFile(TileMap tileMap, string fileName = "TileMapData")
+		{
+			var ids = tileMap.TileSet.GetTilesIds().ToList<int>();
+
+			string header = $"// WARNING: this file is auto-generated. Do not make any direct edits\npublic class {fileName}\n{{\n";
+			string footer = "\n}";
+			StringBuilder file = new StringBuilder(header);
+
+			foreach(var item in ids)
+			{
+				file.AppendLine($"\tpublic const int {tileMap.TileSet.TileGetName(item)} = {item};");
+			}
+
+			file.AppendLine(footer);
+
+			System.IO.File.WriteAllText($"./{fileName}.cs", file.ToString());
 		}
 	}
 
