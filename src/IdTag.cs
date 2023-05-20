@@ -1,5 +1,6 @@
 using Godot;
 using HonedGodot.Extensions;
+using System;
 
 namespace HonedGodot
 {
@@ -7,6 +8,7 @@ namespace HonedGodot
 	{
 		public T Data { get; set; }
 		private Node parent;
+		private Guid guid = Guid.NewGuid();
 
 		public override void _Ready()
 		{
@@ -29,6 +31,11 @@ namespace HonedGodot
 
 				node.AddChild(clone);
 			}
+		}
+
+		public bool SameTag(IdTag<T> otherTag)
+		{
+			return guid == otherTag.guid;
 		}
 	}
 }

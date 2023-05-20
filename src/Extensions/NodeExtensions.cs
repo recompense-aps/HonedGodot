@@ -67,6 +67,16 @@ namespace HonedGodot.Extensions
 			return null;
 		}
 
+		public static bool EquallyTagged<T>(this Node node, Node otherNode)
+		{
+			var tag1 = node?.GetTag<T>();
+			var tag2 = otherNode?.GetTag<T>();
+
+			if (tag1 == null || tag2 == null) return false;
+
+			return tag1.SameTag(tag2);
+		}
+
 		public static void SetZIndexLayer<T>(this Node2D node, T layer) where T:Enum
 		{
 			node.ZIndex = (int)(object)layer;
