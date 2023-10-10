@@ -45,7 +45,7 @@ namespace HonedGodot
 
 		public static void GenerateInputMapConstants(string fileName = "Inputs")
 		{
-			string header = $"// WARNING: this file is auto-generated. Do not make any direct edits\npublic class {fileName}\n{{\n";
+			string header = $"// WARNING: this file is auto-generated. Do not make any direct edits\npublic class Inputs\n{{\n";
 			string footer = "\n}";
 			StringBuilder file = new StringBuilder(header);
 
@@ -56,7 +56,7 @@ namespace HonedGodot
 
 			file.AppendLine(footer);
 
-			System.IO.File.WriteAllText($"./{fileName}.cs", file.ToString());
+			System.IO.File.WriteAllText(fileName, file.ToString());
 
 		}
 

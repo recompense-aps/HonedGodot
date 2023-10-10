@@ -1,3 +1,5 @@
+using System;
+
 namespace HonedGodot
 {
 	public static partial class Constants
@@ -25,6 +27,13 @@ namespace HonedGodot
 
 		#region AudioStreamPlayerSignals
 		public const string Signal_AudioStreamPlayer_Finished = "finished";
+		#endregion
+
+		#region Numbers
+		public const float PIHalves = Godot.Mathf.Pi / 2;
+		public const float PIFourths = Godot.Mathf.Pi / 4;
+		public const float PIEigths = Godot.Mathf.Pi / 8;
+		public const float PISixteenths = Godot.Mathf.Pi / 16;
 		#endregion
 	}
 }

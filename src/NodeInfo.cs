@@ -29,13 +29,6 @@ namespace HonedGodot
 			return this;
 		}
 
-		public NodeInfo AddForStateMachine<T>(FiniteStateMachine<T> machine) where T:Enum
-		{
-			return Add(
-				() => $"state: {machine.CurrentState.Id}"
-			);
-		}
-
 		public NodeInfo AddForCollisionLayerManagement<T>(CollisionLayerManager<T> manager) where T:Enum
 		{
 			return Add(

@@ -1,30 +1,30 @@
 using System;
 using System.Collections.Generic;
 
-namespace HonedGodot
+namespace HonedGodot.State
 {
-	public class FiniteStateMachine<T> where T:Enum
+	public class ComposableFiniteStateMachine<T> where T:Enum
 	{
 		public class State
 		{
 			public T Id { get; set; }
-			public Action<FiniteStateMachine<T>> Start { get; private set; }
-            public Action<FiniteStateMachine<T>> Execute { get; private set; }
-            public Action<FiniteStateMachine<T>> End { get; private set; }
+			public Action<ComposableFiniteStateMachine<T>> Start { get; private set; }
+            public Action<ComposableFiniteStateMachine<T>> Execute { get; private set; }
+            public Action<ComposableFiniteStateMachine<T>> End { get; private set; }
 
-            public State WithStart(Action<FiniteStateMachine<T>> start)
+            public State WithStart(Action<ComposableFiniteStateMachine<T>> start)
             {
                 Start = start;
                 return this;
             }
 
-            public State WithExecute(Action<FiniteStateMachine<T>> execute)
+            public State WithExecute(Action<ComposableFiniteStateMachine<T>> execute)
             {
                 Execute = execute;
                 return this;
             }
 
-            public State WithEnd(Action<FiniteStateMachine<T>> end)
+            public State WithEnd(Action<ComposableFiniteStateMachine<T>> end)
             {
                 End = end;
                 return this;

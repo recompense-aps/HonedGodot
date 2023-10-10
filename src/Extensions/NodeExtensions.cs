@@ -40,6 +40,14 @@ namespace HonedGodot.Extensions
 			return InlineSignals.Connect(context, source, signal, new InlineSignal<T1, T2, T3, T4, T5>(handler));
 		}
 
+		public static void ReConnect(this Node node, string signal, Node source, string handler, Godot.Collections.Array binds = null)
+		{
+			if (node.IsConnected(signal, source, handler))
+				node.Disconnect(signal, source, handler);
+				
+			node.Connect(signal, source, handler, binds);
+		}
+
 		public static void InlineCallDeffered(this Node context, Action action)
 		{
 			var obj = new DefferedObject();
@@ -93,7 +101,6 @@ namespace HonedGodot.Extensions
 				timer.QueueFree();
 				end();
 				locked = true;
-				GD.Print("cleared timer");
 			});
 
 			start();

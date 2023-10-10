@@ -43,7 +43,9 @@ namespace HonedGodot
 		private static void GoToErrorScreen()
 		{
 			if (ErrorScreenPath != null && Context != null)
+			{
 				Context.GetTree().ChangeScene(ErrorScreenPath);
+			}
 		}
 	}
 }
