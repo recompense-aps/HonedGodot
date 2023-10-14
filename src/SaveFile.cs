@@ -5,6 +5,7 @@ namespace HonedGodot
 {
 	public abstract class SaveFile
 	{
+		public string ResolvedSavePath => ProjectSettings.GlobalizePath(SavePath);
 		protected abstract string SavePath { get; }
 		protected virtual bool Encrypted { get; }
 		protected virtual string EncryptionPassword { get; }
