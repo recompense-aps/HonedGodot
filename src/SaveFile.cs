@@ -31,14 +31,15 @@ namespace HonedGodot
 
 			saveFile.StoreLine(json);
 			saveFile.Close();
+			Logging.Log($"Saved: \n{json}\nat {SavePath}", HonedGodotLogTag.SaveFile);
 		}
 
-		public T Load<T>() where T:SaveFile
+		public (T save, string raw) Load<T>() where T:SaveFile
 		{
 			var saveFile = new File();
 
 			if (!saveFile.FileExists(SavePath))
-				return Activator.CreateInstance<T>();
+				return (Activator.CreateInstance<T>(), null);
 
 			if (Encrypted)
 			{
@@ -52,14 +53,10 @@ namespace HonedGodot
 				saveFile.Open(SavePath, File.ModeFlags.Read);
 			}
 
-			string json = "";
-
-			while(saveFile.GetPosition() < saveFile.GetLen())
-			{
-				json += saveFile.GetLine();
-			}
+			string json = saveFile.GetAsText();
+			saveFile.Close();
 			
-			return FromJSON<T>(json);
+			return (FromJSON<T>(json), json);
 		}
 
 		protected abstract string ToJSON();
