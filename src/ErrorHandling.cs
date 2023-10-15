@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Godot;
 
 namespace HonedGodot
@@ -6,6 +7,7 @@ namespace HonedGodot
 	public static class ErrorHandling
 	{
 		public static Exception CrashError { get; private set; }
+		public static string LogContents { get; private set; }
 		public static string ErrorScreenPath { get; private set; }
 		private static Node Context { get; set; }
 		private static bool configured = false;
@@ -44,8 +46,31 @@ namespace HonedGodot
 		{
 			if (ErrorScreenPath != null && Context != null)
 			{
+				try
+				{
+					GetLogContents();
+				}
+				catch(Exception e)
+				{
+					LogContents = $"Unable to load logs: {e}";
+				}
 				Context.GetTree().ChangeScene(ErrorScreenPath);
 			}
+		}
+
+		private static void GetLogContents()
+		{
+			var file = new File();
+			file.Open("user://logs/godot.log", File.ModeFlags.Read);
+
+			var contents = new StringBuilder();
+
+			while(file.GetPosition() < file.GetLen())
+			{
+				contents.AppendLine(file.GetLine());
+			}
+
+			LogContents = contents.ToString();
 		}
 	}
 }
